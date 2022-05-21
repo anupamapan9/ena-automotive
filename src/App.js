@@ -5,6 +5,7 @@ import Login from "./Components/Login/Login";
 import SignUp from "./Components/Login/SignUp";
 import Navbar from "./Components/Common/Navbar";
 import Home from "./Components/Home/Home";
+import Footer from "./Components/Common/Footer";
 function App() {
   return (
     <div>
@@ -14,6 +15,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -9,10 +9,10 @@ const Navbar = () => {
         <li className='rounded-none md:ml-3 mb-3 md:mb-0'><NavLink to='/login'>Log in </NavLink></li>
     </>
     return (
-        <div className="navbar bg-base-100 px-20">
+        <div className="navbar bg-base-100 px-10 md:px-20">
             <div className="navbar">
 
-                <Link className='font-secondary font-extrabold text-3xl' to='/' >Ena Automotive</Link>
+                <Link className='font-secondary font-extrabold text-xl md:text-3xl' to='/' >Ena Automotive</Link>
             </div>
             <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
