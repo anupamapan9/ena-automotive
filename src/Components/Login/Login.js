@@ -77,7 +77,7 @@ const Login = () => {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <input type="submit" value='Sign Up' className="btn btn-primary" />
+                                <input type="submit" value='Sign In' className="btn btn-primary" />
                             </div>
                         </form>
                         <div className="flex flex-col w-full border-opacity-50">

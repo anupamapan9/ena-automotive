@@ -1,12 +1,30 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import { Link, NavLink } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const Navbar = () => {
+    const [user] = useAuthState(auth)
+
+    const logout = () => {
+        signOut(auth);
+        localStorage.removeItem('accessToken')
+        toast.success('Logout Successful')
+    };
     const navLinks = <>
-        <li className='rounded-none md:ml-3 mb-3 md:mb-0'><NavLink to='/'>Home</NavLink></li>
-        <li className='rounded-none md:ml-3 mb-3 md:mb-0'><NavLink to='/blog'>Blog</NavLink></li>
-        <li className='rounded-none md:ml-3 mb-3 md:mb-0'><NavLink to='/portfolio'>Portfolio</NavLink></li>
-        <li className='rounded-none md:ml-3 mb-3 md:mb-0'><NavLink to='/login'>Log in </NavLink></li>
+        <li className='md:ml-3 mb-3 md:mb-0'><NavLink to='/'>Home</NavLink></li>
+        <li className='md:ml-3 mb-3 md:mb-0'><NavLink to='/blog'>Blog</NavLink></li>
+        <li className='md:ml-3 mb-3 md:mb-0'><NavLink to='/portfolio'>Portfolio</NavLink></li>
+        {
+            !user ?
+                <li className='md:ml-3 mb-3 md:mb-0'><NavLink to='/login'>Log in </NavLink></li>
+                :
+                <li className='md:ml-3 mb-3 md:mb-0 bg-accent-focus'><button onClick={logout}>Log Out</button></li>
+
+        }
+
     </>
     return (
         <div className="navbar bg-base-100 px-10 md:px-20">

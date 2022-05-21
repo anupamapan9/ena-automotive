@@ -6,9 +6,11 @@ import SignUp from "./Components/Login/SignUp";
 import Navbar from "./Components/Common/Navbar";
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Common/Footer";
+import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <div>
+      <Toaster />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home></Home>} />
