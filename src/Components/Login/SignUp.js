@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
+import useToken from '../../Hooks/useToken';
 
 const SignUp = () => {
     const navigate = useNavigate()
+
     const [
         createUserWithEmailAndPassword,
         user,
@@ -23,11 +25,17 @@ const SignUp = () => {
 
 
     }
-    if (user) {
-        navigate('/')
-        toast.success('User Added successfully');
 
-    }
+    const [token] = useToken(user)
+
+    useEffect(() => {
+        if (token) {
+            navigate('/')
+            toast.success('User Added successfully');
+
+        }
+    }, [token, navigate])
+
     return (
         <div className="hero min-h-screen bg-base-100">
             <div className="hero-content flex-col lg:flex-row-reverse">

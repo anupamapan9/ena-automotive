@@ -3,13 +3,14 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../../Hooks/useToken';
 // import Loading from '../Common/Loading';
 
 const Login = () => {
-
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
     const [
         signInWithEmailAndPassword,
         user,
@@ -30,7 +31,11 @@ const Login = () => {
     const handelGoogleLogin = () => {
         signInWithGoogle()
     }
-    if (user || gUser) {
+    // get JWT TOKEN
+
+
+    const [token] = useToken(user || gUser)
+    if (token) {
         toast.success('Logged In')
         navigate(from, { replace: true });
     }
