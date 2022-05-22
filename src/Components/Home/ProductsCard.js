@@ -1,10 +1,9 @@
 import React from 'react';
-
 const ProductsCard = ({ product }) => {
     const { name, image, description, min_order, price, quantity } = product;
     console.log(product)
     return (
-        <div class="card rounded-none card-side bg-base-100 shadow-xl">
+        <div class="card rounded-none lg:card-side bg-base-100 shadow-xl">
             <figure><img src={image} className='h-full' alt="Movie" /></figure>
             <div class="card-body">
                 <h2 class="card-title">New movie is released!</h2>
