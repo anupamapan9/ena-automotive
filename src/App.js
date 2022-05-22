@@ -8,10 +8,12 @@ import Home from "./Components/Home/Home";
 import Footer from "./Components/Common/Footer";
 import { Toaster } from "react-hot-toast";
 function App() {
+
   return (
     <div>
       <Toaster />
       <Navbar />
+
       <Routes>
         <Route path='/' element={<Home></Home>} />
         <Route path='/login' element={<Login />} />
