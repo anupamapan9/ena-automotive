@@ -7,7 +7,7 @@ import Fade from 'react-reveal/Fade';
 const Summery = () => {
     return (
         <Fade bottom cascade>
-            <h1 className='font-extrabold text-3xl lg:text-5xl text-center pt-5'>Our Achievements</h1>
+            <h1 className='font-extrabold text-3xl lg:text-5xl text-center pt-5 font-secondary'>Our Achievements</h1>
             <div className='flex flex-col md:flex-row gap-4 justify-around py-10 '>
                 <div className="bg-base-200 p-5 ">
                     <div className='flex justify-center items-center'>
