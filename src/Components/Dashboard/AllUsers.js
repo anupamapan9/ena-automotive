@@ -34,7 +34,7 @@ const AllUsers = () => {
                     <tbody>
                         {/* <!-- row 1 --> */}
                         {
-                            users.map((user, index) => <UserRow user={user} index={index} key={user._id}></UserRow>)
+                            users.map((user, index) => <UserRow user={user} index={index} key={user._id} refetch={refetch}></UserRow>)
                         }
 
                     </tbody>

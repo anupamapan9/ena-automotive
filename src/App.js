@@ -14,6 +14,7 @@ import MyOrders from "./Components/Dashboard/MyOrders";
 import AllOrders from "./Components/Dashboard/AllOrders";
 import AllUsers from "./Components/Dashboard/AllUsers";
 import MyProfile from "./Components/Dashboard/MyProfile";
+import RequireAdmin from "./Components/Common/RequireAdmin";
 function App() {
 
   return (
@@ -35,7 +36,7 @@ function App() {
           <Route index element={<MyOrders />}></Route>
           <Route path="profile" element={<MyProfile />}></Route>
           <Route path="all-orders" element={<AllOrders />}></Route>
-          <Route path="all-users" element={<AllUsers />}></Route>
+          <Route path="all-users" element={<RequireAdmin><AllUsers /></RequireAdmin>}></Route>
         </Route>
       </Routes>
       <Footer />
