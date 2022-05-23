@@ -73,8 +73,8 @@ const Purchase = () => {
     }
 
     return (
-        <div className='lg:px-20 flex justify-around items-center gap-10'>
-            <div className='w-1/2'>
+        <div className='lg:px-20 flex flex-col lg:flex-row justify-around items-center gap-10'>
+            <div className='md:w-1/2'>
                 <div className="card bg-base-100 shadow-xl">
                     <figure><img src={image} alt="Shoes" /></figure>
                     <div className="card-body">
@@ -91,7 +91,7 @@ const Purchase = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-1/2'>
+            <div className='md:w-1/2'>
                 <form onSubmit={handelPlaceOrder}>
                     <div className="form-control">
                         <label className="label">
