@@ -4,8 +4,7 @@ import useProducts from '../../Hooks/useProducts';
 import ProductsCard from './ProductsCard';
 
 const Products = () => {
-    const [products] = useProducts()
-    console.log(products)
+    const [products] = useProducts();
     return (
         <div className='md:px-10 lg:px-20'>
             <h1 className='font-extrabold text-3xl lg:text-5xl text-center pt-5 font-secondary'>Our Products</h1>

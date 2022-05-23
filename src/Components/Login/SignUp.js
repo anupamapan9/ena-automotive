@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import useToken from '../../Hooks/useToken';
+import Loading from '../Common/Loading';
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -14,18 +15,17 @@ const SignUp = () => {
         loading,
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-
-    const handelCreateUser = e => {
+    const handelCreateUser = async (e) => {
         e.preventDefault();
-        const name = e.target.name.value;
+        const displayName = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        createUserWithEmailAndPassword(email, password);
-
-
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName })
     }
-
+    console.log(user)
     const [token] = useToken(user)
 
     useEffect(() => {
@@ -35,7 +35,9 @@ const SignUp = () => {
 
         }
     }, [token, navigate])
-
+    if (loading || updating) {
+        return <Loading />
+    }
     return (
         <div className="hero min-h-screen bg-base-100">
             <div className="hero-content flex-col lg:flex-row-reverse">
