@@ -7,10 +7,13 @@ import Navbar from "./Components/Common/Navbar";
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Common/Footer";
 import { Toaster } from "react-hot-toast";
+import RequireAuth from "./Components/Common/RequireAuth";
 import Purchase from "./Components/Purchase/Purchase";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import MyOrders from "./Components/Dashboard/MyOrders";
 import AllOrders from "./Components/Dashboard/AllOrders";
+import AllUsers from "./Components/Dashboard/AllUsers";
+import MyProfile from "./Components/Dashboard/MyProfile";
 function App() {
 
   return (
@@ -20,12 +23,19 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/purchase/:id' element={<Purchase />} />
+
+        <Route path='/purchase/:id'
+          element={<RequireAuth>
+            <Purchase />
+          </RequireAuth>} />
+
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path="/dashboard" element={<Dashboard></Dashboard>}>
+        <Route path="/dashboard" element={<RequireAuth> <Dashboard /></RequireAuth>}>
           <Route index element={<MyOrders />}></Route>
+          <Route path="profile" element={<MyProfile />}></Route>
           <Route path="all-orders" element={<AllOrders />}></Route>
+          <Route path="all-users" element={<AllUsers />}></Route>
         </Route>
       </Routes>
       <Footer />

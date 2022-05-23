@@ -25,7 +25,6 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         signInWithEmailAndPassword(email, password);
-
     }
     // google login 
     const handelGoogleLogin = () => {
@@ -36,7 +35,6 @@ const Login = () => {
 
     const [token] = useToken(user || gUser)
     if (token) {
-        toast.success('Logged In')
         navigate(from, { replace: true });
     }
     // if (loading || gLoading) {

@@ -13,8 +13,6 @@ const MyOrders = () => {
     if (loading || isLoading) {
         return <Loading />
     }
-    console.log(userOrders)
-
     return (
         <div>
             <h2 className='text-xl font-bold inline-block'>My Orders</h2>
