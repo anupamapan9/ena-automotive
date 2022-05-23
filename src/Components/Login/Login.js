@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
@@ -32,8 +32,8 @@ const Login = () => {
     }
     // get JWT TOKEN
 
-
-    const [token] = useToken(user || gUser)
+    const [authUser] = useAuthState(auth)
+    const [token] = useToken(authUser)
     if (token) {
         navigate(from, { replace: true });
     }

@@ -19,8 +19,8 @@ const AllUsers = () => {
         <div>
             <h2 className='text-xl font-bold inline-block'>All Users</h2>
             {users.length}
-            <div class="overflow-x-auto mt-5">
-                <table class="table w-full">
+            <div className="overflow-x-auto mt-5">
+                <table className="table w-full">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>

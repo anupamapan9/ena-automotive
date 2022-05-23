@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { useForm } from "react-hook-form";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
@@ -9,6 +11,7 @@ import Loading from '../Common/Loading';
 const Purchase = () => {
     const { id } = useParams();
 
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [product, isLoading, refetch] = useSingleProduct(id)
     const [user, loading] = useAuthState(auth)
     if (isLoading || loading) {
@@ -16,61 +19,57 @@ const Purchase = () => {
     }
     const { name, image, description, min_order, price, quantity } = product;
 
-
-    const handelPlaceOrder = e => {
-        e.preventDefault()
-        const ordered_quantity = parseInt(e.target.ordered_quantity.value);
-        const address = e.target.address.value;
-        if (min_order > ordered_quantity) {
-            toast.error(`Opps!! Please Order more than ${min_order}`)
-        } else if (ordered_quantity > quantity) {
-            toast.error(`Sorry we haven't stock more than ${quantity}`)
-        } else {
-            const total_price = (ordered_quantity * price).toFixed(2);
-            const orderedProduct = {
-                orderer: user?.email,
-                ordered_product: name,
-                image,
-                ordered_quantity,
-                price,
-                total_price,
-                address,
-                status: 'unpaid'
-            }
-            fetch('http://localhost:5000/order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                },
-                body: JSON.stringify(orderedProduct),
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.insertedId) {
-                        const newQuantity = quantity - ordered_quantity;
-                        fetch(`http://localhost:5000/product/${id}`, {
-                            method: 'PUT',
-                            headers: {
-                                'content-type': 'application/json',
-                                authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                            },
-                            body: JSON.stringify({ quantity: newQuantity })
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.matchedCount > 0) {
-                                    refetch()
-                                    e.target.reset()
-                                    toast.success('Order Placed, Visit dashboard for pay')
-                                }
-
-                            })
-                    }
-                })
+    const onSubmit = data => {
+        const ordered_quantity = parseInt(data.ordered_quantity);
+        const phone = data.phone;
+        const address = data.address;
+        const total_price = (ordered_quantity * price).toFixed(2);
+        const orderedProduct = {
+            orderer: user?.email,
+            ordered_product: name,
+            image,
+            ordered_quantity,
+            price,
+            phone,
+            total_price,
+            address,
+            status: 'unpaid'
         }
+        fetch('http://localhost:5000/order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(orderedProduct),
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    const newQuantity = quantity - ordered_quantity;
+                    fetch(`http://localhost:5000/product/${id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify({ quantity: newQuantity })
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.matchedCount > 0) {
+                                refetch()
+                                reset()
+                                toast.success('Order Placed, Visit dashboard for pay')
+                            }
 
-    }
+                        })
+                }
+            })
+    };
+    const OrderButton = <>
+        {quantity > 0 ? <input type="submit" defaultValue="Place Order" className="btn mt-5 btn-primary w-full" /> : <input readOnly defaultValue="Out of Stock" className="btn mt-5 btn-error w-full" />}
+    </>
 
     return (
         <div className='lg:px-20 flex flex-col lg:flex-row justify-around items-center gap-10'>
@@ -85,14 +84,13 @@ const Purchase = () => {
                         <p>{description}</p>
                         <div>
                             <h2 className='font-semibold'>Price: $ {price}/Unite</h2>
-                            <p>Available: {quantity} Unite  </p>
-                            <p>Min Order: {min_order} Unite</p>
+                            <p>Available: {quantity} Unite </p>
                         </div>
                     </div>
                 </div>
             </div>
             <div className='md:w-1/2'>
-                <form onSubmit={handelPlaceOrder}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Name</span>
@@ -105,34 +103,55 @@ const Purchase = () => {
                         </label>
                         <input value={user?.email} readOnly className="input input-bordered" />
                     </div>
+
+                    {/* ***************** */}
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Your Quantity( <span className='text-warning'>should more the {min_order} and less than {quantity}</span> )</span>
+                            <span className="label-text">Your Quantity </span>
                         </label>
-                        <input type="number" name='ordered_quantity' placeholder="Please Enter your quantity" className="input input-bordered" />
+                        <input {...register("ordered_quantity", {
+                            max: {
+                                value: quantity,
+                            },
+                            min: {
+                                value: min_order,
+                            }, required: true
+                        })} type="number" defaultValue="100" name='ordered_quantity' placeholder="Please Enter your quantity" className="input input-bordered" />
+                        {errors.ordered_quantity?.type === 'max' && <span className='text-error'>Please Order less than {quantity}</span>}
+                        {errors.ordered_quantity?.type === 'min' && <span className='text-error'>Please Order more than {min_order}</span>}
+                        {errors.ordered_quantity?.type === 'required' && <span className='text-error'>Order Amount Require</span>}
+
                     </div>
+
+
+                    {/* ******************** */}
+
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Phone Number</span>
                         </label>
-                        <input type="number" name='phone' required placeholder="Please Enter your Phone Number" className="input input-bordered" />
+                        <input {...register("phone", {
+                            required: true
+
+                        })} type="number" name='phone' placeholder="Please Enter your quantity" className="input input-bordered" />
+                        {errors.phone?.type === 'required' && <span className='text-error'>Phone Number Require</span>}
                     </div>
+
+
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Shipping address</span>
                         </label>
-                        <input type="text" name='address' required placeholder="Enter shipping address" className="input input-bordered" />
+                        <input {...register("address", {
+                            required: true
+
+                        })} type="text" name='address' required placeholder="Enter shipping address" className="input input-bordered" />
                     </div>
 
-                    <div className="form-control mt-6">
-                        {
-                            quantity < 100 && <input value='Out stock' className="btn btn-error" />
-                        }
-                        {
-                            quantity > 100 && <input type="submit" value='Place Order' className="btn btn-primary" />
-                        }
+                    {
+                        (errors.ordered_quantity?.type === 'max' || errors.ordered_quantity?.type === 'min') ? <input className="btn mt-5 btn-primary w-full" disabled type="submit" /> : OrderButton
+                    }
 
-                    </div>
                 </form>
             </div>
         </div>

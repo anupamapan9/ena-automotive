@@ -7942,10 +7942,10 @@
   "resolved" "https://registry.npmjs.org/react-firebase-hooks/-/react-firebase-hooks-5.0.3.tgz"
   "version" "5.0.3"
 
-"react-hook-form@^7.31.1":
-  "integrity" "sha512-QjtjZ8r8KtEBWWpcXLyQordCraTFxILtyQpaz5KLLxN2YzcC+FZ9LLtOnNGuOnzZo9gCoB+viK3ZHV9Mb2htmQ=="
-  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.31.1.tgz"
-  "version" "7.31.1"
+"react-hook-form@^7.31.2":
+  "integrity" "sha512-oPudn3YuyzWg//IsT9z2cMEjWocAgHWX/bmueDT8cmsYQnGY5h7/njjvMDfLVv3mbdhYBjslTRnII2MIT7eNCA=="
+  "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.31.2.tgz"
+  "version" "7.31.2"
 
 "react-hot-toast@^2.2.0":
   "integrity" "sha512-248rXw13uhf/6TNDVzagX+y7R8J183rp7MwUMNkcrBRyHj/jWOggfXTGlM8zAOuh701WyVW+eUaWG2LeSufX9g=="
