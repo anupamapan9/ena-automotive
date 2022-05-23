@@ -47,10 +47,29 @@ const Purchase = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('Success:', data);
+                    if (data.insertedId) {
+                        const newQuantity = quantity - ordered_quantity;
+                        fetch(`http://localhost:5000/product/${id}`, {
+                            method: 'PUT',
+                            headers: {
+                                'content-type': 'application/json',
+                                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                            },
+                            body: JSON.stringify({ quantity: newQuantity })
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.matchedCount > 0) {
+                                    refetch()
+                                    e.target.reset()
+                                    toast.success('Order Placed, Visit dashboard for pay')
+                                }
+
+                            })
+                    }
                 })
         }
-        e.target.reset()
+
     }
 
     return (
@@ -106,7 +125,13 @@ const Purchase = () => {
                     </div>
 
                     <div className="form-control mt-6">
-                        <input type="submit" value='Place Order' className="btn btn-primary" />
+                        {
+                            quantity < 100 && <input value='Out stock' className="btn btn-error" />
+                        }
+                        {
+                            quantity > 100 && <input type="submit" value='Place Order' className="btn btn-primary" />
+                        }
+
                     </div>
                 </form>
             </div>
