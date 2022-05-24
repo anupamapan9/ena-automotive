@@ -149,7 +149,7 @@ const Purchase = () => {
                     </div>
 
                     {
-                        (errors.ordered_quantity?.type === 'max' || errors.ordered_quantity?.type === 'min') ? <input className="btn mt-5 btn-primary w-full" disabled type="submit" /> : OrderButton
+                        (errors.ordered_quantity?.type === 'max' || errors.ordered_quantity?.type === 'min' || errors.ordered_quantity?.type === 'required') ? <input className="btn mt-5 btn-primary w-full" disabled type="submit" /> : OrderButton
                     }
 
                 </form>
