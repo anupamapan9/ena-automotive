@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react"
+import { useQuery } from "react-query";
 
 const useProducts = () => {
-    const [products, setProducts] = useState([])
-    const [fetching, setFetching] = useState(false)
-    useEffect(() => {
-        setFetching(true)
-        fetch('http://localhost:5000/product')
-            .then(res => res.json())
-            .then(data => {
-                setProducts(data)
-                setFetching(false)
-            })
-    }, [])
-    return [products, fetching]
+    const { data: allProducts, isLoading, refetch } = useQuery('allProducts', () => fetch(`http://localhost:5000/product`, {
+        method: 'GET',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+    return [allProducts, isLoading, refetch]
 }
 export default useProducts;
 
