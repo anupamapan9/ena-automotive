@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
-import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import useToken from '../../Hooks/useToken';
 import Loading from '../Common/Loading';
@@ -17,7 +17,7 @@ const SignUp = () => {
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
 
-    const [authUser] = useAuthState(auth)
+
     const handelCreateUser = async (e) => {
         e.preventDefault();
         const displayName = e.target.name.value;
@@ -27,7 +27,7 @@ const SignUp = () => {
         await createUserWithEmailAndPassword(email, password);
         await updateProfile({ displayName })
     }
-    const [token] = useToken(authUser)
+    const [token] = useToken(user)
 
     useEffect(() => {
         if (token) {
