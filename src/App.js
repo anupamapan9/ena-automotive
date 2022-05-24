@@ -35,8 +35,8 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path="/dashboard" element={<RequireAuth> <Dashboard /></RequireAuth>}>
-          <Route index element={<MyOrders />}></Route>
-          <Route path="profile" element={<MyProfile />}></Route>
+          <Route index element={<MyProfile />}></Route>
+          <Route path="my-order" element={<MyOrders />}></Route>
           <Route path="all-orders" element={<AllOrders />}></Route>
           <Route path="add-review" element={<RequireUser> <AddReview /></RequireUser>}></Route>
           <Route path="all-users" element={<RequireAdmin><AllUsers /></RequireAdmin>}></Route>

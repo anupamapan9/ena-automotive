@@ -3,6 +3,7 @@ import useProducts from '../../Hooks/useProducts';
 import Loading from '../Common/Loading';
 import Header from './Header';
 import Products from './Products';
+import Review from './Review';
 import Summery from './Summery';
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
             <Header />
             <Products />
             <Summery />
-
+            <Review />
         </>
     );
 };

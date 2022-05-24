@@ -27,7 +27,6 @@ const AllUsers = () => {
                             <th>No.</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Delete User</th>
                             <th>Make Admin</th>
                         </tr>
                     </thead>

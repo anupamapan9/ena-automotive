@@ -6,7 +6,7 @@ import ProductsCard from './ProductsCard';
 const Products = () => {
     const [products] = useProducts();
     return (
-        <div className='md:px-10 lg:px-20'>
+        <div className='py-20 md:px-10 lg:px-20 '>
             <h1 className='font-extrabold text-3xl lg:text-5xl text-center pt-5 font-secondary'>Our Products</h1>
             <Fade bottom cascade>
                 <div className=' mt-5 grid grid-cols-1 md:grid-cols-2 gap-5'>
