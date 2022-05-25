@@ -39,6 +39,9 @@ const SignUp = () => {
     if (loading || updating) {
         return <Loading />
     }
+    if (error || updateError) {
+        toast.error(error?.message || updateError?.message)
+    }
     return (
         <div className="hero min-h-screen bg-base-100">
             <div className="hero-content flex-col lg:flex-row-reverse">

@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useToken from '../../Hooks/useToken';
+import Loading from '../Common/Loading';
 // import Loading from '../Common/Loading';
 
 const Login = () => {
@@ -37,11 +38,12 @@ const Login = () => {
     if (token) {
         navigate(from, { replace: true });
     }
-    // if (loading || gLoading) {
-    //     return <Loading />
-    // }
+
     if (error || gError) {
         toast.error(error.message || gError.message)
+    }
+    if (loading || gLoading) {
+        return <Loading />
     }
     return (
         <div className="hero min-h-screen bg-base-100">
@@ -53,7 +55,7 @@ const Login = () => {
                     </p>
 
                     <p>
-                        New In? <Link to='/signup' className='font-bold text-success' >Sign Now!!</Link>
+                        New In? <Link to='/signup' className='font-bold text-success' >Sign Up Now!!</Link>
                     </p>
                 </div>
                 <div className="card flex-shrink-0 md:w-1/2 max-w-sm shadow-2xl bg-base-100">

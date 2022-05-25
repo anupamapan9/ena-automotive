@@ -116,7 +116,7 @@ const Purchase = () => {
                             min: {
                                 value: min_order,
                             }, required: true
-                        })} type="number" defaultValue="100" name='ordered_quantity' placeholder="Please Enter your quantity" className="input input-bordered" />
+                        })} type="number" defaultValue={min_order} name='ordered_quantity' placeholder="Please Enter your quantity" className="input input-bordered" />
                         {errors.ordered_quantity?.type === 'max' && <span className='text-error'>Please Order less than {quantity}</span>}
                         {errors.ordered_quantity?.type === 'min' && <span className='text-error'>Please Order more than {min_order}</span>}
                         {errors.ordered_quantity?.type === 'required' && <span className='text-error'>Order Amount Require</span>}

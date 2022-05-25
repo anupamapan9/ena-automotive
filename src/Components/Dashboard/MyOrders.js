@@ -37,7 +37,7 @@ const MyOrders = () => {
                     <tbody>
                         {/* <!-- row 1 --> */}
                         {
-                            userOrders.map((userOrder, index) => <MyOrderRow userOrder={userOrder} index={index} key={userOrder._id}></MyOrderRow>)
+                            userOrders.map((userOrder, index) => <MyOrderRow userOrder={userOrder} index={index} key={userOrder._id} refetch={refetch}></MyOrderRow>)
                         }
 
                     </tbody>

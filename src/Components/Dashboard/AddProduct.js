@@ -33,7 +33,7 @@ const AddProduct = () => {
                         quantity,
                         image
                     }
-                    fetch(`http://localhost:5000/review`, {
+                    fetch(`http://localhost:5000/product`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
