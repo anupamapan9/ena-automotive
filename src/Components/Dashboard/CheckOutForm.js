@@ -7,7 +7,7 @@ const CheckOutForm = ({ paymentProduct }) => {
     const elements = useElements()
     const [clientSecret, setClientSecret] = useState("");
     const [transactionId, setTransactionId] = useState("");
-    const { total_price } = paymentProduct;
+    const { total_price, _id } = paymentProduct;
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
         fetch("http://localhost:5000/create-payment-intent", {
@@ -60,6 +60,20 @@ const CheckOutForm = ({ paymentProduct }) => {
         } else {
             setTransactionId(paymentIntent.id)
             toast.success('Payment Succeed!TransactionId', transactionId)
+            const payment = {
+                paidFor: _id,
+                status: "paid",
+                transactionId: paymentIntent.id
+            }
+            fetch(`http://localhost:5000/order/${_id}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }, body: JSON.stringify(payment)
+            })
+                .then(res => res.json())
+                .then(data => console.log(data))
         }
     }
 
