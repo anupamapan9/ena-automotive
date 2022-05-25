@@ -27,7 +27,6 @@ const MyOrders = () => {
                             <th>No.</th>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>Status</th>
                             <th>Ordered (Pic)</th>
                             <th>Cancel/ Transition ID</th>
                             <th>Pay</th>
