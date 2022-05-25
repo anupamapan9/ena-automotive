@@ -1,0 +1,43 @@
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import React from 'react';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import Loading from '../Common/Loading';
+import CheckOutForm from './CheckOutForm';
+const stripePromise = loadStripe('pk_test_51L1Q0hLIOSuHsWeTJA73wJRhFfxf8NdeMCz1tQI9jOmFznB70dFlFBHkdBXl5i7FSyhqOptxrOxrYvubz1V3BjGl00w1uHvKXq');
+const Payment = () => {
+    const { id } = useParams()
+    const url = `http://localhost:5000/ordered/${id}`
+    const { data: paymentProduct, isLoading, refetch } = useQuery(['paymentProduct', id], () => fetch(url, {
+        method: 'GET',
+        headers: {
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    })
+        .then(res => res.json()))
+    if (isLoading) {
+        return <Loading />
+    }
+    console.log(paymentProduct)
+    return (
+        <div class="card lg:card-side bg-base-100 shadow-xl">
+            <div class="card lg:w-1/2 bg-base-100 shadow-xl">
+
+                <figure><img src={paymentProduct.image} alt="Shoes" className='lg:w-full lg:h-96' /></figure>
+                <div class="card-body">
+                    <h1 className='font-medium text-2xl'>{paymentProduct.ordered_product}</h1>
+                    <h5 className='font-medium'>Ordered: {paymentProduct.ordered_quantity} Unit</h5>
+                    <h5 className='font-medium'>Total: {paymentProduct.total_price} Unit</h5>
+                </div>
+            </div>
+            <div class="card-body">
+                <Elements stripe={stripePromise}>
+                    <CheckOutForm />
+                </Elements>
+            </div>
+        </div>
+    );
+};
+
+export default Payment;
