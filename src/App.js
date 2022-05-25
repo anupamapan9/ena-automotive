@@ -20,6 +20,7 @@ import RequireUser from "./Components/Common/RequireUser";
 import AddProduct from "./Components/Dashboard/AddProduct";
 import ManageProducts from "./Components/Dashboard/ManageProducts";
 import Payment from "./Components/Dashboard/Payment";
+import NotFound from "./Components/Common/NotFound";
 function App() {
 
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="add-product" element={<RequireAdmin><AddProduct /></RequireAdmin>}></Route>
           <Route path="manage-products" element={<RequireAdmin><ManageProducts /></RequireAdmin>}></Route>
         </Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />
     </div>
