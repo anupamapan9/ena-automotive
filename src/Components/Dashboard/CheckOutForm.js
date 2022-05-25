@@ -6,6 +6,7 @@ const CheckOutForm = ({ paymentProduct }) => {
     const stripe = useStripe()
     const elements = useElements()
     const [clientSecret, setClientSecret] = useState("");
+    const [transactionId, setTransactionId] = useState("");
     const { total_price } = paymentProduct;
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -40,10 +41,30 @@ const CheckOutForm = ({ paymentProduct }) => {
 
         if (error) {
             toast.error(error.message)
+        }
+        const { paymentIntent, intentError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        email: paymentProduct?.orderer,
+                        address: paymentProduct?.address,
+                        phone: paymentProduct?.phone,
+                    },
+                },
+            },
+        );
+        if (intentError) {
+            toast.error(intentError?.message)
         } else {
-            console.log('[PaymentMethod]', paymentMethod);
+            setTransactionId(paymentIntent.id)
+            toast.success('Payment Succeed!TransactionId', transactionId)
         }
     }
+
+
+
     return (
         <form onSubmit={handleSubmit}>
             <CardElement
