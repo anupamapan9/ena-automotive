@@ -1,10 +1,26 @@
-import { async } from '@firebase/util';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
-const CheckOutForm = () => {
+const CheckOutForm = ({ paymentProduct }) => {
     const stripe = useStripe()
     const elements = useElements()
+    const [clientSecret, setClientSecret] = useState("");
+    const { total_price } = paymentProduct;
+    useEffect(() => {
+        // Create PaymentIntent as soon as the page loads
+        fetch("http://localhost:5000/create-payment-intent", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify({ price: total_price }),
+        })
+            .then((res) => res.json())
+            .then((data) => setClientSecret(data.clientSecret));
+    }, [total_price]);
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!elements || !stripe) {
@@ -15,6 +31,17 @@ const CheckOutForm = () => {
         const card = elements.getElement(CardElement);
         if (card === null) {
             return
+        }
+
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card,
+        });
+
+        if (error) {
+            toast.error(error.message)
+        } else {
+            console.log('[PaymentMethod]', paymentMethod);
         }
     }
     return (
@@ -35,7 +62,7 @@ const CheckOutForm = () => {
                     },
                 }}
             />
-            <button className='btn btn-primary btn-xs mt-5' type="submit" disabled={!stripe}>
+            <button className='btn btn-primary btn-xs mt-5' type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
         </form>
