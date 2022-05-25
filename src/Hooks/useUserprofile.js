@@ -2,7 +2,6 @@ import { useQuery } from "react-query";
 
 
 const useUserprofile = (email) => {
-    console.log(email)
     const { data: updatedUser, isLoading, refetch } = useQuery(['updatedUser', email], () => fetch(`http://localhost:5000/user/${email}`, {
         method: 'GET',
         headers: {

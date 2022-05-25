@@ -1,10 +1,14 @@
 import React from 'react';
 import useProducts from '../../Hooks/useProducts';
 import Loading from '../Common/Loading';
+import ManageProductRow from './ManageProductRow';
 
 const ManageProducts = () => {
     const [allProducts, isLoading, refetch] = useProducts()
-    console.log(allProducts)
+
+
+
+
     if (isLoading) {
         return <Loading />
     }
@@ -25,17 +29,7 @@ const ManageProducts = () => {
                     </thead>
                     <tbody>
                         {
-                            allProducts?.map((product, index) => <tr>
-                                <th>{index + 1}</th>
-                                <td><div class="avatar">
-                                    <div class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                        <img src={product.image} alt='' />
-                                    </div>
-                                </div></td>
-                                <td>{product.name}</td>
-                                <td>fsdafsdafdas</td>
-
-                            </tr>)
+                            allProducts?.map((product, index) => <ManageProductRow product={product} index={index} key={product._id} refetch={refetch}></ManageProductRow>)
                         }
 
                     </tbody>

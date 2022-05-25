@@ -8,7 +8,6 @@ import MyOrderRow from './MyOrderRow';
 const MyOrders = () => {
     const [user, loading] = useAuthState(auth)
     const email = user?.email;
-    console.log(email)
     const [userOrders, isLoading, refetch] = useOrdersByEmail(email)
     if (loading || isLoading) {
         return <Loading />

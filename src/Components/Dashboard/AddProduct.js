@@ -42,7 +42,6 @@ const AddProduct = () => {
                         body: JSON.stringify(product)
                     }).then(res => res.json())
                         .then(data => {
-                            console.log(data)
                             if (data.acknowledged) {
                                 toast.success('successFully uploaded')
                                 e.target.reset()

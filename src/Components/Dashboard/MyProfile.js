@@ -12,11 +12,8 @@ const MyProfile = () => {
     }
     const [user, loading] = useAuthState(auth)
     const email = user?.email;
-    console.log(email)
     const [updatedUser, isLoading, refetch] = useUserprofile(email)
 
-
-    console.log(updatedUser)
     const handelEditUser = e => {
         e.preventDefault()
         const displayName = e.target.displayName.value;
