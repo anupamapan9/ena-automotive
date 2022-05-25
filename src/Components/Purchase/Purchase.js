@@ -3,10 +3,11 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useSingleProduct from '../../Hooks/useSingleProduct';
 import Loading from '../Common/Loading';
+import { signOut } from 'firebase/auth';
 
 const Purchase = () => {
     const { id } = useParams();
@@ -43,7 +44,14 @@ const Purchase = () => {
             },
             body: JSON.stringify(orderedProduct),
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    signOut(auth);
+                    localStorage.removeItem('accessToken');
+                    Navigate('/');
+                }
+                return res.json()
+            })
             .then(data => {
                 if (data.insertedId) {
                     const newQuantity = quantity - ordered_quantity;
@@ -55,7 +63,14 @@ const Purchase = () => {
                         },
                         body: JSON.stringify({ quantity: newQuantity })
                     })
-                        .then(res => res.json())
+                        .then(res => {
+                            if (res.status === 401 || res.status === 403) {
+                                signOut(auth);
+                                localStorage.removeItem('accessToken');
+                                Navigate('/');
+                            }
+                            return res.json()
+                        })
                         .then(data => {
                             if (data.matchedCount > 0) {
                                 refetch()

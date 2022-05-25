@@ -1,7 +1,11 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const AddProduct = () => {
+    const navigate = useNavigate()
     const handelAddProduct = e => {
         e.preventDefault()
         const name = e.target.name.value;
@@ -40,12 +44,19 @@ const AddProduct = () => {
                             authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(product)
-                    }).then(res => res.json())
+                    })
+                        .then(res => {
+                            if (res.status === 401 || res.status === 403) {
+                                signOut(auth);
+                                localStorage.removeItem('accessToken');
+                                navigate('/');
+                            }
+                            return res.json()
+                        })
                         .then(data => {
                             if (data.acknowledged) {
                                 toast.success('successFully uploaded')
                                 e.target.reset()
-
                             }
                         })
                 }

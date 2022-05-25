@@ -1,5 +1,8 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { Navigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const DeleteOrderModal = ({ pid, name, setConfirmDelete, refetch }) => {
 
@@ -11,7 +14,15 @@ const DeleteOrderModal = ({ pid, name, setConfirmDelete, refetch }) => {
                 'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             },
-        }).then(res => res.json())
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    signOut(auth);
+                    localStorage.removeItem('accessToken');
+                    Navigate('/');
+                }
+                return res.json()
+            })
             .then(data => {
                 if (data.deletedCount > 0) {
                     toast.success('Successfully Delete')

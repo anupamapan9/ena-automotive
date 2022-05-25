@@ -1,4 +1,7 @@
+import { signOut } from "firebase/auth";
 import { useQuery } from "react-query";
+import { Navigate } from "react-router-dom";
+import auth from "../firebase.init";
 
 
 const useUserprofile = (email) => {
@@ -8,7 +11,14 @@ const useUserprofile = (email) => {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     })
-        .then(res => res.json()))
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth);
+                localStorage.removeItem('accessToken');
+                Navigate('/');
+            }
+            return res.json()
+        }))
     return [updatedUser, isLoading, refetch]
 };
 

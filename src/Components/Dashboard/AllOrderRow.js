@@ -1,7 +1,11 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const AllOrderRow = ({ allOrder, refetch }) => {
+    const navigate = useNavigate()
     const { orderer, ordered_product, _id, status } = allOrder;
     const handelShipped = (id) => {
         fetch(`http://localhost:5000/order/shipped/${id}`, {
@@ -11,7 +15,14 @@ const AllOrderRow = ({ allOrder, refetch }) => {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }, body: JSON.stringify({ status: 'shipped' })
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    signOut(auth);
+                    localStorage.removeItem('accessToken');
+                    navigate('/');
+                }
+                return res.json()
+            })
             .then(data => {
                 if (data.modifiedCount > 0) {
                     toast.success('Product Shipped')

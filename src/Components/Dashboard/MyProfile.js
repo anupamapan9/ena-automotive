@@ -1,7 +1,9 @@
+import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { BsPencilFill } from 'react-icons/bs'
+import { Navigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import useUserprofile from '../../Hooks/useUserprofile';
 import Loading from '../Common/Loading';
@@ -51,7 +53,15 @@ const MyProfile = () => {
                             authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         },
                         body: JSON.stringify(currentUser)
-                    }).then(res => res.json())
+                    })
+                        .then(res => {
+                            if (res.status === 401 || res.status === 403) {
+                                signOut(auth);
+                                localStorage.removeItem('accessToken');
+                                Navigate('/');
+                            }
+                            return res.json()
+                        })
                         .then(data => {
                             if (data.modifiedCount > 0) {
                                 toast.success('successFully uploaded')

@@ -25,9 +25,12 @@ const Dashboard = () => {
                 <ul className="menu pt-5 p-4 gap-2 overflow-y-auto w-80 rounded-md bg-slate-200 text-base-content">
                     {/* <!-- Sidebar content here --> */}
                     <li><Link to='/dashboard'>My Profile</Link></li>
-                    <li><Link to='my-order'>My Orders</Link></li>
+
                     {
-                        !admin && <li><Link to='add-review'>Add A review</Link></li>
+                        !admin && <>
+                            <li><Link to='add-review'>Add A review</Link></li>
+                            <li><Link to='my-order'>My Orders</Link></li>
+                        </>
                     }
 
                     {admin && <>

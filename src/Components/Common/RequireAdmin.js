@@ -19,6 +19,7 @@ const RequireAdmin = ({ children }) => {
         // along to that page after they login, which is a nicer user experience
         // than dropping them off on the home page.
         signOut(auth)
+        localStorage.removeItem('accessToken')
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
 

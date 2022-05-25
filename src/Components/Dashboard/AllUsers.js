@@ -1,5 +1,8 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useQuery } from 'react-query';
+import { Navigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 import Loading from '../Common/Loading';
 import UserRow from './UserRow';
 
@@ -11,7 +14,14 @@ const AllUsers = () => {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     })
-        .then(res => res.json()))
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth);
+                localStorage.removeItem('accessToken');
+                Navigate('/');
+            }
+            return res.json()
+        }))
     if (isLoading) {
         return <Loading />
     }

@@ -1,6 +1,9 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { Navigate } from 'react-router-dom';
+import auth from '../../firebase.init';
 
 const CheckOutForm = ({ paymentProduct }) => {
     const stripe = useStripe()
@@ -72,7 +75,14 @@ const CheckOutForm = ({ paymentProduct }) => {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`
                 }, body: JSON.stringify(payment)
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (res.status === 401 || res.status === 403) {
+                        signOut(auth);
+                        localStorage.removeItem('accessToken');
+                        Navigate('/');
+                    }
+                    return res.json()
+                })
                 .then(data => console.log(data))
         }
     }

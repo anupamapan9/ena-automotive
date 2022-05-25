@@ -1,8 +1,10 @@
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
+import auth from '../../firebase.init';
 import Loading from '../Common/Loading';
 import CheckOutForm from './CheckOutForm';
 const stripePromise = loadStripe('pk_test_51L1Q0hLIOSuHsWeTJA73wJRhFfxf8NdeMCz1tQI9jOmFznB70dFlFBHkdBXl5i7FSyhqOptxrOxrYvubz1V3BjGl00w1uHvKXq');
@@ -15,7 +17,14 @@ const Payment = () => {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     })
-        .then(res => res.json()))
+        .then(res => {
+            if (res.status === 401 || res.status === 403) {
+                signOut(auth);
+                localStorage.removeItem('accessToken');
+                Navigate('/');
+            }
+            return res.json()
+        }))
     if (isLoading) {
         return <Loading />
     }
