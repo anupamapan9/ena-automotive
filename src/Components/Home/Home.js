@@ -1,6 +1,8 @@
 import React from 'react';
 import useProducts from '../../Hooks/useProducts';
 import Loading from '../Common/Loading';
+import Clients from './Clients';
+import CompanyBrief from './CompanyBrief';
 import Header from './Header';
 import Products from './Products';
 import Review from './Review';
@@ -15,8 +17,10 @@ const Home = () => {
         <>
             <Header />
             <Products />
+            <CompanyBrief />
             <Summery />
             <Review />
+            <Clients />
         </>
     );
 };

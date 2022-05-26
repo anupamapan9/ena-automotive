@@ -4,8 +4,7 @@ import Rating from 'react-rating';
 const ReviewCard = ({ review }) => {
     const { displayName, rating, description } = review;
     return (
-        <div class="card w-96 bg-base-100 shadow-xl">
-
+        <div class="card bg-base-100 shadow-xl">
             <div class="card-body">
                 <div class="avatar">
                     <div class="w-14 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">

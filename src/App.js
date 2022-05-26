@@ -23,6 +23,7 @@ import Payment from "./Components/Dashboard/Payment";
 import NotFound from "./Components/Common/NotFound";
 import Portfolio from "./Components/Portfolio/Portfolio";
 import Blog from "./Components/Blog/Blog";
+import Forgotten from "./Components/Login/Forgotten";
 function App() {
 
   return (
@@ -34,7 +35,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/blog' element={<Blog />} />
-
+        <Route path='/forgotten' element={<Forgotten />}></Route>
         <Route path='/purchase/:id'
           element={<RequireAuth>
             <RequireUser>
