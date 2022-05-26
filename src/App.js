@@ -21,6 +21,7 @@ import AddProduct from "./Components/Dashboard/AddProduct";
 import ManageProducts from "./Components/Dashboard/ManageProducts";
 import Payment from "./Components/Dashboard/Payment";
 import NotFound from "./Components/Common/NotFound";
+import Portfolio from "./Components/Portfolio/Portfolio";
 function App() {
 
   return (
@@ -30,6 +31,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/portfolio' element={<Portfolio />} />
 
         <Route path='/purchase/:id'
           element={<RequireAuth>

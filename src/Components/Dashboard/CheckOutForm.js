@@ -65,7 +65,7 @@ const CheckOutForm = ({ paymentProduct }) => {
             toast.success('Payment Succeed!TransactionId', transactionId)
             const payment = {
                 paidFor: _id,
-                status: "paid",
+                status: "pending",
                 transactionId: paymentIntent.id
             }
             fetch(`http://localhost:5000/order/${_id}`, {
