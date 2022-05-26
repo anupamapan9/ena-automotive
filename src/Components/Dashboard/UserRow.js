@@ -1,5 +1,6 @@
 import React from 'react';
 import toast from 'react-hot-toast';
+import Loading from '../Common/Loading';
 
 const UserRow = ({ index, user, refetch }) => {
     const { email, displayName, role } = user;
@@ -24,11 +25,10 @@ const UserRow = ({ index, user, refetch }) => {
                 }
             })
     }
-
     return (
         <tr>
             <th>{index + 1}</th>
-            <td>{displayName}</td>
+            <td>{displayName ? displayName : 'Unknown'}</td>
             <td>{email}</td>
             {
                 role === 'admin' ? <td><button className='btn btn-base outline-none btn-xs' disabled>Admin</button></td> : <td><button className='btn btn-base outline-none btn-xs' onClick={makeAdmin}>Make Admin</button></td>

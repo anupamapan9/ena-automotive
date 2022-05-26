@@ -18,7 +18,7 @@ const MyProfile = () => {
 
     const handelEditUser = e => {
         e.preventDefault()
-        const displayName = e.target.displayName.value;
+        const education = e.target.education.value;
         const phone = e.target.phone.value;
         const city = e.target.city.value;
         const social = e.target.social.value;
@@ -40,7 +40,7 @@ const MyProfile = () => {
                 if (result.success) {
                     const avatar = result.data.url
                     const currentUser = {
-                        displayName,
+                        education,
                         phone,
                         city,
                         social,
@@ -94,7 +94,7 @@ const MyProfile = () => {
                             <tbody>
                                 {/* - row 1  */}
                                 <tr>
-                                    <th className='hover:bg-cyan-500 bg-cyan-600 duration-300'>Name: {updatedUser.displayName}</th>
+                                    <th className='hover:bg-cyan-500 bg-cyan-600 duration-300'>Name: {user?.displayName}</th>
                                 </tr>
                                 {/* row 2  */}
                                 <tr >
@@ -108,7 +108,10 @@ const MyProfile = () => {
                                     <th className='hover:bg-cyan-600 bg-cyan-500 duration-300'>Address: {updatedUser.city}</th>
                                 </tr>
                                 <tr>
-                                    <th className='hover:bg-cyan-500 bg-cyan-600 duration-300'><a href={updatedUser.social} target="_blank" rel="noopener noreferrer">Linked In:</a></th>
+                                    <th className='hover:bg-cyan-600 bg-cyan-500 duration-300'>Education: {updatedUser.education}</th>
+                                </tr>
+                                <tr>
+                                    <th className='hover:bg-cyan-500 bg-cyan-600 duration-300'><a href={updatedUser.social} target="_blank" rel="noopener noreferrer">Linked In: {updatedUser.social}</a></th>
                                 </tr>
                             </tbody>
                         </table>
@@ -122,7 +125,7 @@ const MyProfile = () => {
                             <h2 class="card-title text-white">Update Your Profile</h2>
                             <form onSubmit={handelEditUser}>
                                 <div class="form-control w-full max-w-xs">
-                                    <input type="text" placeholder="Enter Your Name" name='displayName' class="input input-bordered w-full max-w-xs" />
+                                    <input type="text" placeholder="Enter Your Education" name='education' class="input input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div class="form-control w-full mt-2 max-w-xs">
