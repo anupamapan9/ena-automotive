@@ -32,7 +32,7 @@ const Navbar = () => {
     </>
     return (
         <div className="navbar bg-base-100 md:px-20">
-            <div className="navbar-start">
+            <div className="navbar">
 
 
                 <div className='lg:hidden'>
