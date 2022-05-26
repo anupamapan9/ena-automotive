@@ -6,45 +6,15 @@ import header4 from '../../image/header4.jpg'
 const Header = () => {
     return (
         <div className="carousel h-[89.5vh] w-full">
-            <div id="slide1" className="carousel-item relative w-full">
-                <img src={header1} alt='' className="w-full image-full" />
-                <div className='absolute w-full h-full text-3xl text-white font-bold flex justify-center items-center '>
-                    <h1 className=''>Global Leader in Drivetrain and <br /> e-Propulsion Systems</h1>
+            <div className="carousel-item relative w-full">
+                <img src={header4} alt='' className="w-full image-full" />
+                <div className='absolute w-full h-full text-white font-bold items-center flex lg:px-20 '>
+                    <div>
+                        <h1 className='md:text-6xl text-3xl'>Global Leader in Manufacture  <br /> Automotive parts</h1>
+                        <button className='btn btn-primary rounded-none text-right'><a href="#products"> Start A Journey With Us</a></button>
+                    </div>
                 </div>
                 <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide4" className="btn btn-circle">❮</a>
-                    <a href="#slide2" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide2" className="carousel-item relative w-full">
-                <img src={header2} alt='' className="w-full" />
-                <div className='absolute w-full h-full text-3xl text-white font-bold flex justify-center items-center '>
-                    <h1 className=''>Global Leader in Drivetrain and <br /> e-Propulsion Systems</h1>
-                </div>
-
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide1" className="btn btn-circle">❮</a>
-                    <a href="#slide3" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide3" className="carousel-item relative w-full">
-                <img src={header3} alt='' className="w-full" />
-                <div className='absolute w-full h-full text-3xl text-white font-bold flex justify-center items-center '>
-                    <h1 className=''>Global Leader in Drivetrain and <br /> e-Propulsion Systems</h1>
-                </div>
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide2" className="btn btn-circle">❮</a>
-                    <a href="#slide4" className="btn btn-circle">❯</a>
-                </div>
-            </div>
-            <div id="slide4" className="carousel-item relative w-full">
-                <img src={header4} alt='' className="w-full" />
-                <div className='absolute w-full h-full text-3xl text-white font-bold flex justify-center items-center '>
-                    <h1 className=''>Global Leader in Drivetrain and <br /> e-Propulsion Systems</h1>
-                </div>
-                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                    <a href="#slide3" className="btn btn-circle">❮</a>
-                    <a href="#slide1" className="btn btn-circle">❯</a>
                 </div>
             </div>
         </div>

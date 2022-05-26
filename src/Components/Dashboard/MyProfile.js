@@ -125,22 +125,22 @@ const MyProfile = () => {
                             <h2 class="card-title text-white">Update Your Profile</h2>
                             <form onSubmit={handelEditUser}>
                                 <div class="form-control w-full max-w-xs">
-                                    <input type="text" placeholder="Enter Your Education" name='education' class="input input-bordered w-full max-w-xs" />
+                                    <input type="text" required placeholder="Enter Your Education" name='education' class="input input-bordered w-full max-w-xs" />
                                 </div>
 
                                 <div class="form-control w-full mt-2 max-w-xs">
-                                    <input type="text" placeholder="Enter Phone Number" class="input input-bordered w-full max-w-xs" name='phone' />
+                                    <input type="text" required placeholder="Enter Phone Number" class="input input-bordered w-full max-w-xs" name='phone' />
                                 </div>
                                 <div class="form-control w-full mt-2 max-w-xs">
-                                    <input type="text" placeholder="Enter City Name" name='city' class="input input-bordered w-full max-w-xs" />
+                                    <input type="text" required placeholder="Enter City Name" name='city' class="input input-bordered w-full max-w-xs" />
                                 </div>
                                 <div class="form-control w-full mt-2 max-w-xs">
-                                    <input type="text" placeholder="Enter LinkedIn Profile name"
+                                    <input type="text" required placeholder="Enter LinkedIn Profile name"
                                         name='social'
                                         class="input input-bordered w-full max-w-xs" />
                                 </div>
                                 <div class="form-control w-full mt-2 max-w-xs">
-                                    <input type="file" name='image' placeholder="Enter LinkedIn Profile name" class="w-full max-w-xs" />
+                                    <input type="file" required name='image' placeholder="Enter LinkedIn Profile name" class="w-full max-w-xs" />
                                 </div>
                                 <div class="card-actions">
                                     <input type="submit" value="Update" class="btn btn-primary" />
