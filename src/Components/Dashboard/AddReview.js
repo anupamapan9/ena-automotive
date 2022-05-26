@@ -17,7 +17,7 @@ const AddReview = () => {
             displayName
         }
 
-        fetch('http://localhost:5000/review', {
+        fetch('https://young-gorge-13678.herokuapp.com/review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

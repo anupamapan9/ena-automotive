@@ -46,7 +46,7 @@ const MyProfile = () => {
                         social,
                         avatar
                     }
-                    fetch(`http://localhost:5000/user/update/${email}`, {
+                    fetch(`https://young-gorge-13678.herokuapp.com/user/update/${email}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json',

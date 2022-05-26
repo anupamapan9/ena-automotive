@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import auth from "../firebase.init";
 
 const useOrdersByEmail = email => {
-    const { data: userOrders, isLoading, refetch } = useQuery(['userOrder', email], () => fetch(`http://localhost:5000/order/${email}`, {
+    const { data: userOrders, isLoading, refetch } = useQuery(['userOrder', email], () => fetch(`https://young-gorge-13678.herokuapp.com/order/${email}`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

@@ -37,7 +37,7 @@ const AddProduct = () => {
                         quantity,
                         image
                     }
-                    fetch(`http://localhost:5000/product`, {
+                    fetch(`https://young-gorge-13678.herokuapp.com/product`, {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

@@ -8,7 +8,7 @@ const ConfirmDeleteModal = ({ pid, name, setConfirmDelete, refetch }) => {
 
     const handelDelete = id => {
         setConfirmDelete(false)
-        fetch(`http://localhost:5000/product/${id}`, {
+        fetch(`https://young-gorge-13678.herokuapp.com/product/${id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',

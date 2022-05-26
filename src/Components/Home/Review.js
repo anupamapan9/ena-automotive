@@ -4,7 +4,7 @@ import Loading from '../Common/Loading';
 import ReviewCard from './ReviewCard';
 
 const Review = () => {
-    const { data: reviews, isLoading } = useQuery('reviews', () => fetch(`http://localhost:5000/review`)
+    const { data: reviews, isLoading } = useQuery('reviews', () => fetch(`https://young-gorge-13678.herokuapp.com/review`)
         .then(res => res.json()))
 
     if (isLoading) {

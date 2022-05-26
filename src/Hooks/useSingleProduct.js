@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import auth from "../firebase.init";
 
 const useSingleProduct = id => {
-    const { data: product, isLoading, refetch } = useQuery(['product', id], () => fetch(`http://localhost:5000/product/${id}`, {
+    const { data: product, isLoading, refetch } = useQuery(['product', id], () => fetch(`https://young-gorge-13678.herokuapp.com/product/${id}`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

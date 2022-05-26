@@ -36,7 +36,7 @@ const Purchase = () => {
             address,
             status: 'unpaid'
         }
-        fetch('http://localhost:5000/order', {
+        fetch('https://young-gorge-13678.herokuapp.com/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const Purchase = () => {
             .then(data => {
                 if (data.insertedId) {
                     const newQuantity = quantity - ordered_quantity;
-                    fetch(`http://localhost:5000/product/${id}`, {
+                    fetch(`https://young-gorge-13678.herokuapp.com/product/${id}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json',

@@ -10,7 +10,7 @@ import CheckOutForm from './CheckOutForm';
 const stripePromise = loadStripe('pk_test_51L1Q0hLIOSuHsWeTJA73wJRhFfxf8NdeMCz1tQI9jOmFznB70dFlFBHkdBXl5i7FSyhqOptxrOxrYvubz1V3BjGl00w1uHvKXq');
 const Payment = () => {
     const { id } = useParams()
-    const url = `http://localhost:5000/ordered/${id}`
+    const url = `https://young-gorge-13678.herokuapp.com/ordered/${id}`
     const { data: paymentProduct, isLoading, refetch } = useQuery(['paymentProduct', id], () => fetch(url, {
         method: 'GET',
         headers: {

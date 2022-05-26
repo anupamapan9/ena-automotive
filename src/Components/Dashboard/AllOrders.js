@@ -6,7 +6,7 @@ import auth from '../../firebase.init';
 import Loading from '../Common/Loading';
 import AllOrderRow from './AllOrderRow';
 const AllOrders = () => {
-    const { data: allOrders, isLoading, refetch } = useQuery('allOrders', () => fetch(`http://localhost:5000/order`, {
+    const { data: allOrders, isLoading, refetch } = useQuery('allOrders', () => fetch(`https://young-gorge-13678.herokuapp.com/order`, {
         method: 'GET',
         headers: {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`

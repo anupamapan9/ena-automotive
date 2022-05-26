@@ -13,7 +13,7 @@ const useToken = (user) => {
             displayName: displayName
         };
         if (email) {
-            fetch(`http://localhost:5000/user/${email}`, {
+            fetch(`https://young-gorge-13678.herokuapp.com/user/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

@@ -8,7 +8,7 @@ const AllOrderRow = ({ allOrder, refetch }) => {
     const navigate = useNavigate()
     const { orderer, ordered_product, _id, status } = allOrder;
     const handelShipped = (id) => {
-        fetch(`http://localhost:5000/order/shipped/${id}`, {
+        fetch(`https://young-gorge-13678.herokuapp.com/order/shipped/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json',
