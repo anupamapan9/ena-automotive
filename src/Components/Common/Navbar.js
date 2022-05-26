@@ -26,7 +26,10 @@ const Navbar = () => {
             !user ?
                 <li className='md:ml-3 mb-3 md:mb-0'><NavLink to='/login'>Log in </NavLink></li>
                 :
-                <li className='md:ml-3 mb-3 md:mb-0 bg-accent-focus'><button onClick={logout}>Log Out</button></li>
+                <>
+                    <li className='md:ml-3 mb-3 md:mb-0 bg-accent-focus'><button onClick={logout}>Log Out</button></li>
+                    <li className='font-bold text-primary'>{user?.displayName}</li>
+                </>
 
         }
     </>

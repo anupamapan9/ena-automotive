@@ -62,7 +62,8 @@ const CheckOutForm = ({ paymentProduct }) => {
             toast.error(intentError?.message)
         } else {
             setTransactionId(paymentIntent.id)
-            toast.success('Payment Succeed!TransactionId', transactionId)
+            toast.success('Payment Succeed!TransactionId:-', paymentIntent.id)
+            Navigate('/dashboard/my-order')
             const payment = {
                 paidFor: _id,
                 status: "pending",
