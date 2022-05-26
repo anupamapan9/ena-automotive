@@ -36,7 +36,7 @@ const AllOrderRow = ({ allOrder, refetch }) => {
             <td>{orderer}</td>
             <td>{status}</td>
             <td>
-                {status === 'paid' && <button onClick={() => handelShipped(_id)} className='btn btn-accent btn-xs'>Ship</button>}
+                {status === 'pending' && <button onClick={() => handelShipped(_id)} className='btn btn-accent btn-xs'>Ship</button>}
                 {status === 'shipped' && <button className='btn btn-xs btn-disabled'>Shipped</button>}
             </td>
         </tr>
