@@ -12,9 +12,11 @@ const Forgotten = () => {
     );
     const handelResetPass = e => {
         e.preventDefault()
-        const email = e.target.email
+
+        const email = e.target.email.value;
         sendPasswordResetEmail(email)
         e.target.reset()
+        toast.success('Send the reset password')
     }
     if (sending) {
         return <Loading />
