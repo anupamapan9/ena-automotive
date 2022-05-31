@@ -40,7 +40,7 @@ const Login = () => {
     }
 
     if (error || gError) {
-        toast.error(error.message || gError.message)
+        toast.error(error?.message || gError?.message)
     }
     if (loading || gLoading) {
         return <Loading />

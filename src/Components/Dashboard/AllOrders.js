@@ -35,6 +35,7 @@ const AllOrders = () => {
                                 <th>Product</th>
                                 <th>Email</th>
                                 <th>Status</th>
+                                <th>Delete</th>
                                 <th>Shipped</th>
                             </tr>
                         </thead>
