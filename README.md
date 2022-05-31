@@ -24,8 +24,8 @@ This project for an automotive parts manufacturer company. Who build the parts a
 ### `Live Site :` [https://ena-automotive.web.app/](https://ena-automotive.web.app/)
 ### `Server Repo :` [https://github.com/programming-hero-web-course1/manufacturer-website-server-side-anupamapan9](https://github.com/programming-hero-web-course1/manufacturer-website-server-side-anupamapan9)
 `admin access` 
-`email: test@phero.com` 
-`pass: 123456654321` 
+`Secure` 
+
 
 # Thanks 
 Anupam Mitra
